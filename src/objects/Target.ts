@@ -10,8 +10,10 @@ class Target extends Hittable {
 		this.r = r
 		this.setHitbox(0, 0, { r: 10 }, this)
 	}
+	getR() { return this.r }
 	init(x = canvas.width / 2, y = canvas.height / 2) {
 		this.coor = new Coor(x, y)
+		this.dy=0
 	}
 	jump() {
 		this.dy = -10
@@ -46,4 +48,4 @@ class Target extends Hittable {
 }
 
 const target: Target = new Target()
-export { target }
+export { Target, target }

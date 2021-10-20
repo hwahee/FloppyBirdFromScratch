@@ -8,7 +8,7 @@ const frame = 50
 const fps = 1000 / frame
 const ratio = frame / standard_frame
 
-const SCROLL_SPEED = 4
+const SCROLL_SPEED = 6
 
 function dpf(n: number) { return n }//distance per frame
 function rad(n: number) { return n * Math.PI / 180 }

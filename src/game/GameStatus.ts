@@ -20,6 +20,13 @@ class GameStatus {
 			ctx.closePath()
 		}
 	}
+	drawGameInfoOnPlay(score:number){
+		ctx.beginPath();
+		ctx.fillStyle = "gray"
+		ctx.textAlign = "center";
+		ctx.fillText(`SCORE: ${score}`, canvas.width / 2, 60);
+		ctx.closePath();
+	}
 	drawGameover(final_score: number, final_missile_dodged: number) {
 		if (this.drawOneTime) {
 			this.drawOneTime = false
@@ -34,7 +41,7 @@ class GameStatus {
 			offset += offset_increase
 			ctx.fillText("Time : " + final_score + "\n", canvas.width / 2, canvas.height / 2 + offset)
 			offset += offset_increase
-			ctx.fillText("Wall dodged : " + final_missile_dodged + "\n", canvas.width / 2, canvas.height / 2 + offset)
+			ctx.fillText("Wall Passed : " + final_missile_dodged + "\n", canvas.width / 2, canvas.height / 2 + offset)
 			offset += offset_increase
 			ctx.closePath()
 		}

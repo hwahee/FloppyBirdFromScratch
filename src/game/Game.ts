@@ -5,6 +5,7 @@ import { timer } from './Timer.js'
 import { gameStatus } from './GameStatus.js'
 import { wallList } from '../objects/Wall.js'
 import { mouse } from '../system/Mouse.js'
+import { ground } from '../objects/Ground.js'
 
 let status_pause = false
 
@@ -28,6 +29,7 @@ document.getElementById("myCanvas")?.addEventListener("click", (e) => {
 
 function update() {
     if (!status_pause) {
+        ground.update()
         target.update()
         wallList.update()
     }
@@ -35,12 +37,15 @@ function update() {
 function draw() {
     if (!status_pause) {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+
         target.draw()
         wallList.draw()
+        ground.draw()
+        gameStatus.drawGameInfoOnPlay(wallList.getWallPassed())
     }
 }
 function collision() {
-    if(wallList.isHitWith(target)){
+    if (wallList.isHitWith(target) || ground.isHitWith(target)) {
         gameStatus.setStatus(3)
     }
 }
@@ -60,7 +65,7 @@ function main() {
 
     }
     else if (gameStatus.getStatus() === 3) {        //gameover
-        gameStatus.drawGameover(Math.floor(timer.now() / 1000), wallList.getWallDodged())
+        gameStatus.drawGameover(Math.floor(timer.now() / 1000), wallList.getWallPassed())
     }
 }
 
