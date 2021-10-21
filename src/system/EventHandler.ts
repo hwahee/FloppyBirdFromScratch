@@ -11,5 +11,4 @@ class EventHandler {
 	}
 }
 const eventHandler:EventHandler=new EventHandler()
-
 export {eventHandler}

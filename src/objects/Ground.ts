@@ -1,4 +1,4 @@
-import { canvas, ctx, rad, SCROLL_SPEED } from "../game/Global.js"
+import { canvas, ctx, SCROLL_SPEED } from "../game/Global.js"
 import { Hittable } from "./Objects.js"
 
 class Ground extends Hittable{
@@ -6,7 +6,7 @@ class Ground extends Hittable{
 	private h:number
 	constructor(){
 		super(canvas.width/2, canvas.height-20, SCROLL_SPEED, 180)
-		this.img.src="images/grass.png"
+		this.img[0].src="images/grass.png"
 
 		this.w=canvas.width*2
 		this.h=40
@@ -28,7 +28,7 @@ class Ground extends Hittable{
 		ctx.save()
 		ctx.translate(this.coor.x-this.w/2,this.coor.y-this.h/2)
 		ctx.rect(0, 0, this.w, this.h)
-		ctx.fillStyle=ctx.createPattern(this.img, "repeat") as CanvasPattern
+		ctx.fillStyle=ctx.createPattern(this.img[0], "repeat") as CanvasPattern
 		ctx.fill()
 		ctx.restore()
 		ctx.closePath()

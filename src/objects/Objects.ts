@@ -1,4 +1,4 @@
-import { ctx, canvas, dpf, rad, distCoor2Coor, deg, drawEllipseByCenter, randint, DEBUG } from '../game/Global.js'
+import { ctx, canvas, dpf, rad, distCoor2Coor, DEBUG } from '../game/Global.js'
 
 class Coor {
 	constructor(public x: number, public y: number) {
@@ -146,13 +146,15 @@ class Objects {
 class Movable extends Objects {
 	protected speed: number
 	protected dir: number
-	protected img: HTMLImageElement
+	protected img: HTMLImageElement[]=[]
+	protected img_cursor:number=-1
 	constructor(x: number, y: number, speed: number, dir: number) {
 		super(x, y)
 		this.speed = speed
 		this.dir = dir
-		this.img = new Image()
-		this.img.src = "images/default_image.png"
+		this.img.push(new Image())
+		this.img[0].src = "images/default_image.png"
+		this.img_cursor=0
 	}
 	setSpeed(val: number) { this.speed = val }
 	getSpeed() { return this.speed }
@@ -175,7 +177,7 @@ class Movable extends Objects {
 		ctx.save()
 		ctx.translate(this.coor.x, this.coor.y)
 		ctx.rotate(rad(this.dir))
-		ctx.drawImage(this.img, -this.img.naturalWidth / 2, -this.img.naturalHeight / 2, this.img.naturalWidth, this.img.naturalHeight)
+		ctx.drawImage(this.img[this.img_cursor], -this.img[this.img_cursor].naturalWidth / 2, -this.img[this.img_cursor].naturalHeight / 2, this.img[this.img_cursor].naturalWidth, this.img[this.img_cursor].naturalHeight)
 		ctx.restore()
 		ctx.closePath()
 	}
@@ -215,6 +217,10 @@ class Hittable extends Movable {
 		for (let hbox of this.hitbox) {
 			hbox.draw()
 		}
+	}
+	draw(){
+		super.draw()
+		this.hitbox.forEach((i)=>{i.draw()})
 	}
 }
 

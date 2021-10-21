@@ -1,4 +1,5 @@
 import { canvas, ctx, randint, SCROLL_SPEED } from '../game/Global.js'
+import { MessageDelivery } from '../system/MessageInteraction.js'
 import { Hittable } from './Objects.js'
 import { Target, target } from "./Target.js"
 
@@ -77,6 +78,7 @@ class WallWithHole extends Wall {
 class WallList {
 	private list: Wall[] = []
 	private wall_passed: number = 0
+	private MD:MessageDelivery=new MessageDelivery()
 	constructor() {
 		this.init()
 	}
@@ -110,6 +112,7 @@ class WallList {
 			if (!i.isPassed()){
 				if(i.pass(target)){
 					this.wall_passed++
+					this.MD.deliver("AUDIO_pass")
 				}
 			}
 		})
