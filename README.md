@@ -1,5 +1,6 @@
 # FloppyBirdFromScratch
 플로피 버드 게임 직접 제작하기
+
 ![Floppy Bird Gameplay](https://user-images.githubusercontent.com/44242823/138229190-466cb18d-0dad-46c0-b111-cb3847bcc8de.png)
 
 ## 빌드 및 실행
